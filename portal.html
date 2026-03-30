@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Client Portal | Leicester Surgical Specialists</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container nav-wrap">
+      <a class="brand" href="index.html"><img src="assets/images/logo.png" alt="Leicester Surgical Specialists logo"><span>Leicester Surgical Specialists</span></a>
+      <nav class="main-nav">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="procedures.html">Procedures</a>
+        <a href="experience.html">The Experience</a>
+        <a href="portal.html">Client Portal</a>
+        <a href="contact.html">Request Consultation</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="section">
+    <div class="container reveal">
+      <h1 class="section-title">Private Client Portal</h1>
+      <p class="section-subtitle">A secure, calm dashboard environment for timeline tracking, direct updates, recovery guidance and appointment visibility.</p>
+
+      <div class="portal-shell">
+        <aside class="portal-sidebar card">
+          <h3>Patient Profile</h3>
+          <p><strong>Name:</strong> Private Member</p>
+          <p><strong>Care Lead:</strong> Hazel Busby Earle</p>
+          <p><strong>Status:</strong> Active Care Pathway</p>
+          <div class="highlight-bar">
+            <span class="pill">Secure Access</span>
+            <span class="pill">Encrypted Notes</span>
+          </div>
+          <h3 style="margin-top:1rem;">Quick Actions</h3>
+          <ul class="list">
+            <li>View next appointment</li>
+            <li>Upload recovery photo</li>
+            <li>Message consultant team</li>
+          </ul>
+        </aside>
+
+        <section class="portal-main">
+          <article class="card portal-block">
+            <h3>Personal Timeline</h3>
+            <div class="timeline-item">
+              <span class="timeline-dot"></span>
+              <div>
+                <strong>Consultation Confirmed</strong>
+                <p>Private consultation scheduled with full pre-visit guidance.</p>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <span class="timeline-dot"></span>
+              <div>
+                <strong>Procedure Planning</strong>
+                <p>Clinical plan documented with tailored outcome notes.</p>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <span class="timeline-dot"></span>
+              <div>
+                <strong>Recovery Week 1</strong>
+                <p>Daily reassurance prompts and milestone check-ins active.</p>
+              </div>
+            </div>
+          </article>
+
+          <article class="card portal-block">
+            <h3>Private Messages</h3>
+            <div class="message-thread">
+              <div class="message message-in">
+                <p>Good morning. Your post-procedure swelling pattern is expected. Continue the guidance plan and we will review tomorrow.</p>
+                <span>Hazel Busby Earle Team</span>
+              </div>
+              <div class="message message-out">
+                <p>Thank you. I feel reassured and will continue exactly as advised.</p>
+                <span>You</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="card portal-block">
+            <h3>Recovery Guidance</h3>
+            <div class="grid-3">
+              <article class="card"><h4>Day 1</h4><p>Normal symptom reassurance and comfort guidance.</p></article>
+              <article class="card"><h4>Day 3</h4><p>Confidence-building check-in and practical support.</p></article>
+              <article class="card"><h4>Week 1</h4><p>Progress reflection and next-step alignment.</p></article>
+            </div>
+          </article>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer"><div class="container"><p>Leicester Surgical Specialists | Client portal concept for private care continuity</p></div></footer>
+  <script src="script.js"></script>
+</body>
+</html>
