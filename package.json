@@ -1,0 +1,14 @@
+{
+  "name": "leicester-surgical-specialists-site",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Static site with optional media upload backend",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.21.2",
+    "multer": "^1.4.5-lts.2"
+  }
+}

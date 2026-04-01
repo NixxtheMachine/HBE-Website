@@ -49,7 +49,7 @@
           </div>
         </div>
         <div class="hero-media reveal">
-          <img src="assets/images/hazeyhead.png" alt="Hazel Busby Earle headshot">
+          <img id="heroPortraitImage" src="assets/images/hazeyhead.png" alt="Hazel Busby Earle headshot">
           <a class="hero-media-location" href="#maxillofacial-explainer" data-toggle-target="maxillofacial-explainer" aria-controls="maxillofacial-explainer" aria-expanded="false">Maxillofacial Consultant: What Is It We Do?</a>
         </div>
       </div>
@@ -98,14 +98,13 @@
             <h2 class="section-title">Clinical Excellence in Practice</h2>
             <p class="section-subtitle">A brief look at consultant-led precision in theatre.</p>
             <div class="video-stage">
-              <video class="auto-video" autoplay muted loop playsinline controls preload="metadata" poster="assets/images/hbe.png">
-                <source src="assets/videos/surgery-clip.mp4" type="video/mp4">
-                <source src="assets/videos/surgery-clip.mov" type="video/quicktime">
+              <video id="clinicalVideoPlayer" class="auto-video" autoplay muted loop playsinline controls preload="metadata" poster="assets/images/hbe.png">
+                <source src="assets/videos/clinical-hbe-surgery-final.mov?v=20260330f" type="video/quicktime">
                 Your browser does not support embedded video playback.
               </video>
               <span class="play-button" aria-hidden="true">Clinical Clip</span>
             </div>
-            <p class="note">Primary clip: <code>assets/videos/surgery-clip.mp4</code> (MOV fallback also supported).</p>
+            <p class="note">Primary clip: <code>assets/videos/clinical-hbe-surgery-final.mov</code>.</p>
           </article>
           <article class="card clinical-copy-card">
             <h2 class="section-title pink-heading">Surgery is personal. Your experience should be too.</h2>
@@ -188,7 +187,7 @@
           <article class="card">
             <h3>Professional Portrait</h3>
             <div class="portrait-frame">
-              <img src="assets/images/professional-portrait-hbe.jpeg" alt="Hazel Busby Earle professional portrait">
+              <img id="professionalPortraitImage" src="assets/images/professional-portrait-hbe.jpeg" alt="Hazel Busby Earle professional portrait">
             </div>
           </article>
           <article class="card intro-copy-card">
@@ -205,13 +204,12 @@
             <div class="intro-video-panel is-collapsed" id="intro-hbe-video-panel">
               <div class="video-stage" id="intro-hbe-video">
                 <video id="introHbeVideo" class="auto-video" autoplay muted loop playsinline controls preload="metadata" poster="assets/images/hazel-1.jpg">
-                  <source src="assets/videos/hazel-intro.mp4" type="video/mp4">
-                  <source src="assets/videos/intro-hbe.mov" type="video/quicktime">
+                  <source src="assets/videos/intro-hbe-final.mov?v=20260330f" type="video/quicktime">
                   Your browser does not support embedded video playback.
                 </video>
                 <span class="play-button" aria-hidden="true">Private Intro</span>
               </div>
-              <p class="note">Introduction clip: <code>assets/videos/hazel-intro.mp4</code> (MOV fallback supported).</p>
+              <p class="note">Introduction clip: <code>assets/videos/intro-hbe-final.mov</code>.</p>
             </div>
           </article>
         </div>
@@ -287,6 +285,51 @@
           </article>
         </div>
         <a class="btn btn-primary" href="contact.html">Request a Private Consultation</a>
+      </div>
+    </section>
+
+    <section class="section admin-media is-collapsed" id="adminMediaPanel">
+      <div class="container reveal">
+        <h2 class="section-title">Media Manager</h2>
+        <p class="section-subtitle">Drag and drop media to update the live visuals. Open this panel with <code>?admin=1</code>.</p>
+        <div class="admin-media-grid">
+          <article class="card upload-card" data-media-key="heroPortrait">
+            <h3>Hero Portrait</h3>
+            <p>Image file</p>
+            <label class="upload-drop-zone">
+              <span>Drop image here or click to upload</span>
+              <input type="file" accept="image/*">
+            </label>
+            <p class="upload-status" aria-live="polite"></p>
+          </article>
+          <article class="card upload-card" data-media-key="professionalPortrait">
+            <h3>Professional Portrait</h3>
+            <p>Image file</p>
+            <label class="upload-drop-zone">
+              <span>Drop image here or click to upload</span>
+              <input type="file" accept="image/*">
+            </label>
+            <p class="upload-status" aria-live="polite"></p>
+          </article>
+          <article class="card upload-card" data-media-key="clinicalVideo">
+            <h3>Clinical Video</h3>
+            <p>Video file</p>
+            <label class="upload-drop-zone">
+              <span>Drop video here or click to upload</span>
+              <input type="file" accept="video/*">
+            </label>
+            <p class="upload-status" aria-live="polite"></p>
+          </article>
+          <article class="card upload-card" data-media-key="introVideo">
+            <h3>Introduction Video</h3>
+            <p>Video file</p>
+            <label class="upload-drop-zone">
+              <span>Drop video here or click to upload</span>
+              <input type="file" accept="video/*">
+            </label>
+            <p class="upload-status" aria-live="polite"></p>
+          </article>
+        </div>
       </div>
     </section>
   </main>

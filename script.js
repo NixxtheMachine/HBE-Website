@@ -111,10 +111,109 @@ function initVideoPlayButtons() {
   });
 }
 
+const MEDIA_TARGETS = {
+  heroPortrait: { type: 'image', elementId: 'heroPortraitImage' },
+  professionalPortrait: { type: 'image', elementId: 'professionalPortraitImage' },
+  clinicalVideo: { type: 'video', elementId: 'clinicalVideoPlayer' },
+  introVideo: { type: 'video', elementId: 'introHbeVideo' }
+};
+
+function applyMediaItem(key, url) {
+  const target = MEDIA_TARGETS[key];
+  if (!target || !url) return;
+  const el = document.getElementById(target.elementId);
+  if (!el) return;
+
+  if (target.type === 'image') {
+    el.src = url;
+    return;
+  }
+
+  if (target.type === 'video' && el instanceof HTMLVideoElement) {
+    el.src = url;
+    el.load();
+  }
+}
+
+async function loadMediaOverrides() {
+  try {
+    const response = await fetch('/api/media', { cache: 'no-store' });
+    if (!response.ok) return;
+    const data = await response.json();
+    Object.entries(data).forEach(([key, url]) => applyMediaItem(key, url));
+  } catch (_error) {
+    // Backend may not be running (e.g., GitHub Pages static mode).
+  }
+}
+
+function initAdminPanelVisibility() {
+  const panel = document.getElementById('adminMediaPanel');
+  if (!panel) return;
+  const params = new URLSearchParams(window.location.search);
+  if (params.get('admin') === '1') {
+    panel.classList.remove('is-collapsed');
+  }
+}
+
+async function uploadMediaFile(key, file, statusEl) {
+  if (!file) return;
+  statusEl.textContent = 'Uploading...';
+  const body = new FormData();
+  body.append('key', key);
+  body.append('file', file);
+
+  try {
+    const response = await fetch('/api/upload', { method: 'POST', body });
+    if (!response.ok) throw new Error(`Upload failed: ${response.status}`);
+    const result = await response.json();
+    applyMediaItem(key, result.url);
+    statusEl.textContent = 'Upload complete.';
+  } catch (_error) {
+    statusEl.textContent = 'Upload failed. Backend may be offline.';
+  }
+}
+
+function initAdminMediaUploads() {
+  const cards = document.querySelectorAll('.upload-card');
+  if (cards.length === 0) return;
+
+  cards.forEach((card) => {
+    const key = card.getAttribute('data-media-key');
+    const input = card.querySelector('input[type="file"]');
+    const zone = card.querySelector('.upload-drop-zone');
+    const statusEl = card.querySelector('.upload-status');
+    if (!key || !input || !zone || !statusEl) return;
+
+    input.addEventListener('change', () => {
+      const [file] = input.files || [];
+      uploadMediaFile(key, file, statusEl);
+    });
+
+    zone.addEventListener('dragover', (event) => {
+      event.preventDefault();
+      zone.classList.add('drag-over');
+    });
+
+    zone.addEventListener('dragleave', () => {
+      zone.classList.remove('drag-over');
+    });
+
+    zone.addEventListener('drop', (event) => {
+      event.preventDefault();
+      zone.classList.remove('drag-over');
+      const file = event.dataTransfer?.files?.[0];
+      uploadMediaFile(key, file, statusEl);
+    });
+  });
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   highlightCurrentNav();
   initRevealAnimations();
   initConsultationForm();
   initExplainerToggles();
   initVideoPlayButtons();
+  initAdminPanelVisibility();
+  initAdminMediaUploads();
+  loadMediaOverrides();
 });
