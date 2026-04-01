@@ -120,6 +120,29 @@ const MEDIA_TARGETS = {
   introVideo: { type: 'video', elementId: 'introHbeVideo' }
 };
 
+function normalizeMediaUrl(url) {
+  if (!url) return '';
+  const withoutQuery = String(url).split('?')[0].split('#')[0];
+  const origin = window.location.origin;
+  if (withoutQuery.startsWith(origin)) {
+    return withoutQuery.slice(origin.length);
+  }
+  return withoutQuery;
+}
+
+function updatePresetActiveState(key, currentUrl) {
+  const group = document.querySelector(`[data-preset-key="${key}"]`);
+  if (!group) return;
+  const normalizedCurrent = normalizeMediaUrl(currentUrl);
+  const buttons = group.querySelectorAll('.preset-button');
+  buttons.forEach((button) => {
+    const presetUrl = normalizeMediaUrl(button.getAttribute('data-media-url'));
+    const isActive = normalizedCurrent && presetUrl === normalizedCurrent;
+    button.classList.toggle('is-active', isActive);
+    button.setAttribute('aria-pressed', String(Boolean(isActive)));
+  });
+}
+
 function applyMediaItem(key, url) {
   const target = MEDIA_TARGETS[key];
   if (!target || !url) return;
@@ -128,6 +151,7 @@ function applyMediaItem(key, url) {
 
   if (target.type === 'image') {
     el.src = url;
+    updatePresetActiveState(key, url);
     return;
   }
 
@@ -238,6 +262,7 @@ function initMediaPresets() {
     const card = group.closest('.upload-card');
     const statusEl = card?.querySelector('.upload-status');
     const buttons = group.querySelectorAll('.preset-button');
+    buttons.forEach((button) => button.setAttribute('aria-pressed', 'false'));
     buttons.forEach((button) => {
       button.addEventListener('click', () => {
         const url = button.getAttribute('data-media-url');
