@@ -29,6 +29,10 @@
 
   <main>
     <section class="hero">
+      <div class="hero-background" aria-hidden="true">
+        <img id="heroBackgroundImage" src="assets/images/new-fresh-hbe-site-mockup.jpg" alt="">
+      </div>
+      <div class="hero-overlay" aria-hidden="true"></div>
       <div class="container hero-grid">
         <div class="hero-copy reveal">
           <span class="kicker">Private Surgical Experience</span>
@@ -52,6 +56,9 @@
           <img id="heroPortraitImage" src="assets/images/hazeyhead.png" alt="Hazel Busby Earle headshot">
           <a class="hero-media-location" href="#maxillofacial-explainer" data-toggle-target="maxillofacial-explainer" aria-controls="maxillofacial-explainer" aria-expanded="false">Maxillofacial Consultant: What Is It We Do?</a>
         </div>
+      </div>
+      <div class="container reveal">
+        <p class="hero-personal-line">Surgery is personal. Your experience should be too.</p>
       </div>
     </section>
 
@@ -293,6 +300,26 @@
         <h2 class="section-title">Media Manager</h2>
         <p class="section-subtitle">Drag and drop media to update the live visuals. Open this panel with <code>?admin=1</code>.</p>
         <div class="admin-media-grid">
+          <article class="card upload-card" data-media-key="heroBackground">
+            <h3>Hero Background</h3>
+            <p>Image file</p>
+            <label class="upload-drop-zone">
+              <span>Drop image here or click to upload</span>
+              <input type="file" accept="image/*">
+            </label>
+            <div class="preset-controls" data-preset-key="heroBackground">
+              <p>Quick presets:</p>
+              <div class="preset-grid">
+                <button type="button" class="preset-button" data-media-url="/assets/images/new-fresh-hbe-site-mockup.jpg">Main Mockup Hero</button>
+                <button type="button" class="preset-button" data-media-url="/assets/images/hazel-1.jpg">Hazel Hero 1</button>
+                <button type="button" class="preset-button" data-media-url="/assets/images/hazel-2.jpg">Hazel Hero 2</button>
+                <button type="button" class="preset-button" data-media-url="/assets/images/hazel-3.jpg">Hazel Hero 3</button>
+                <button type="button" class="preset-button" data-media-url="/assets/images/hazel-4.jpg">Hazel Hero 4</button>
+                <button type="button" class="preset-button" data-media-url="/assets/images/hazel-5.jpg">Hazel Hero 5</button>
+              </div>
+            </div>
+            <p class="upload-status" aria-live="polite"></p>
+          </article>
           <article class="card upload-card" data-media-key="heroPortrait">
             <h3>Hero Portrait</h3>
             <p>Image file</p>

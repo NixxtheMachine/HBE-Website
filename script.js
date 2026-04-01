@@ -33,6 +33,7 @@ function highlightCurrentNav() {
 function initConsultationForm() {
   const form = document.getElementById('consultationForm');
   if (!form) return;
+  if (form.action && form.action.includes('formspree.io')) return;
 
   form.addEventListener('submit', (event) => {
     event.preventDefault();
@@ -112,6 +113,7 @@ function initVideoPlayButtons() {
 }
 
 const MEDIA_TARGETS = {
+  heroBackground: { type: 'image', elementId: 'heroBackgroundImage' },
   heroPortrait: { type: 'image', elementId: 'heroPortraitImage' },
   professionalPortrait: { type: 'image', elementId: 'professionalPortraitImage' },
   clinicalVideo: { type: 'video', elementId: 'clinicalVideoPlayer' },
@@ -143,6 +145,25 @@ async function loadMediaOverrides() {
     Object.entries(data).forEach(([key, url]) => applyMediaItem(key, url));
   } catch (_error) {
     // Backend may not be running (e.g., GitHub Pages static mode).
+  }
+}
+
+async function setMediaUrlValue(key, url, statusEl) {
+  if (!key || !url) return;
+  if (statusEl) statusEl.textContent = 'Applying preset...';
+  try {
+    const response = await fetch('/api/media/set', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ key, url })
+    });
+    if (!response.ok) throw new Error(`Save failed: ${response.status}`);
+    const result = await response.json();
+    applyMediaItem(result.key, result.url);
+    if (statusEl) statusEl.textContent = 'Preset applied.';
+  } catch (_error) {
+    applyMediaItem(key, url);
+    if (statusEl) statusEl.textContent = 'Preset applied locally (backend offline).';
   }
 }
 
@@ -207,6 +228,25 @@ function initAdminMediaUploads() {
   });
 }
 
+function initMediaPresets() {
+  const presetGroups = document.querySelectorAll('[data-preset-key]');
+  if (presetGroups.length === 0) return;
+
+  presetGroups.forEach((group) => {
+    const key = group.getAttribute('data-preset-key');
+    if (!key) return;
+    const card = group.closest('.upload-card');
+    const statusEl = card?.querySelector('.upload-status');
+    const buttons = group.querySelectorAll('.preset-button');
+    buttons.forEach((button) => {
+      button.addEventListener('click', () => {
+        const url = button.getAttribute('data-media-url');
+        setMediaUrlValue(key, url, statusEl);
+      });
+    });
+  });
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   highlightCurrentNav();
   initRevealAnimations();
@@ -215,5 +255,6 @@ document.addEventListener('DOMContentLoaded', () => {
   initVideoPlayButtons();
   initAdminPanelVisibility();
   initAdminMediaUploads();
+  initMediaPresets();
   loadMediaOverrides();
 });
